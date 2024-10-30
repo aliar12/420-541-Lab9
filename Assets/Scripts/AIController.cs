@@ -9,7 +9,7 @@ public class AIController : MonoBehaviour
     public Transform[] Waypoints;
     public Transform Player;
     public float SightRange = 10f;
-    public float AttackRange = 5f; // New attack range variable
+    public float AttackRange = 2f; // New attack range variable
     public LayerMask PlayerLayer;
     public StateType currentState;
     void Start()
@@ -28,24 +28,10 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
-
-        if (distanceToPlayer < AttackRange)
-        {
-            StateMachine.TransitionToState(StateType.Attack);
-        }
-        else if (distanceToPlayer < SightRange)
-        {
-            StateMachine.TransitionToState(StateType.Chase);
-        }
-        else if (currentState == StateType.Chase)
-        {
-            StateMachine.TransitionToState(StateType.Patrol);
-        }
-
         StateMachine.Update();
+        Animator.SetFloat("CharacterSpeed", Agent.velocity.magnitude);
+        currentState = StateMachine.GetCurrentStateType();
     }
-
 
     public bool CanSeePlayer()
     {

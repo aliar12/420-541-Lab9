@@ -14,8 +14,7 @@ public class AttackState : IState
 
     public void Enter()
     {
-
-        aiController.Animator.SetBool("isAttacking", false);
+        // No animations, so no need to set any animator parameters
         aiController.Agent.isStopped = true; // Stop the AI agent movement
     }
 

@@ -35,4 +35,3 @@ public class IdleState : IState
         // Cleanup if necessary
     }
 }
-
